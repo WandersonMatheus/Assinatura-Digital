@@ -1,4 +1,4 @@
-package com.Equipe1.AssinaturaDigital;
+package com.Equipe1.AssinaturaDigital.Service;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
-public class Controller {
+public class TermoService {
 
     @GetMapping("/boasVindas")
     public String boasVindas(){
