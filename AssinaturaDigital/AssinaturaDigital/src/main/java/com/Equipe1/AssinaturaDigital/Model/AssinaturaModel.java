@@ -2,24 +2,28 @@ package com.Equipe1.AssinaturaDigital.Model;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 @Entity
+@Document(collection = "assinaturas")
 public class AssinaturaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false) // uma assinatura está ligada a um cliente
+    @ManyToOne(optional = false)
     private ClienteModel cliente;
 
-    @ManyToOne(optional = false) // uma assinatura está ligada a um termo
+    @ManyToOne(optional = false) 
     private TermoModel termo;
 
-    @ManyToOne(optional = false) // uma assinatura pertence a um cenário
+    @ManyToOne(optional = false)   
     private CenarioModel cenario;
     private LocalDateTime dataAssinatura;
     private String ip;
