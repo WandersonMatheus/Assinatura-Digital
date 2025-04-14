@@ -1,72 +1,68 @@
-package com.Equipe1.AssinaturaDigital.Model;
+package com.Equipe1.AssinaturaDigital.Assinatura;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-@Entity
-@Document(collection = "assinaturas")
+@Document(collection = "assinaturas") 
 public class AssinaturaModel {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne(optional = false)
-    private ClienteModel cliente;
-
-    @ManyToOne(optional = false) 
-    private TermoModel termo;
-
-    @ManyToOne(optional = false)   
-    private CenarioModel cenario;
+    private String id; 
+    
+    private String clienteId;  
+    private String termoId;    
+    private String cenarioId;  
+    
     private LocalDateTime dataAssinatura;
     private String ip;
     private String localizacao;
-   
+
+    // Construtores, getters e setters
+
     public AssinaturaModel() {
     }
 
-    public AssinaturaModel(ClienteModel cliente, TermoModel termo, CenarioModel cenario, LocalDateTime dataAssinatura,
-            String ip, String localizacao) {
-        this.cliente = cliente;
-        this.termo = termo;
-        this.cenario = cenario;
+    public AssinaturaModel(String clienteId, String termoId, String cenarioId, LocalDateTime dataAssinatura, String ip, String localizacao) {
+        this.clienteId = clienteId;
+        this.termoId = termoId;
+        this.cenarioId = cenarioId;
         this.dataAssinatura = dataAssinatura;
         this.ip = ip;
         this.localizacao = localizacao;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public ClienteModel getCliente() {
-        return cliente;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setCliente(ClienteModel cliente) {
-        this.cliente = cliente;
+    public String getClienteId() {
+        return clienteId;
     }
 
-    public TermoModel getTermo() {
-        return termo;
+    public void setClienteId(String clienteId) {
+        this.clienteId = clienteId;
     }
 
-    public void setTermo(TermoModel termo) {
-        this.termo = termo;
+    public String getTermoId() {
+        return termoId;
     }
 
-    public CenarioModel getCenario() {
-        return cenario;
+    public void setTermoId(String termoId) {
+        this.termoId = termoId;
     }
 
-    public void setCenario(CenarioModel cenario) {
-        this.cenario = cenario;
+    public String getCenarioId() {
+        return cenarioId;
+    }
+
+    public void setCenarioId(String cenarioId) {
+        this.cenarioId = cenarioId;
     }
 
     public LocalDateTime getDataAssinatura() {
@@ -92,8 +88,4 @@ public class AssinaturaModel {
     public void setLocalizacao(String localizacao) {
         this.localizacao = localizacao;
     }
-    
-
-
-
 }

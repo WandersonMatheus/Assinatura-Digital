@@ -1,4 +1,4 @@
-package com.Equipe1.AssinaturaDigital.Model;
+package com.Equipe1.AssinaturaDigital.Funcionario;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,13 +10,11 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-@Entity
 @Document(collection = "funcionarios")
 public class FuncionarioModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
     private String nome;
     @Column(unique = true)
     @Email
@@ -34,7 +32,7 @@ public class FuncionarioModel {
         this.senha = senha;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
     public String getNome() {

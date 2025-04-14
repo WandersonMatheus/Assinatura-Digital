@@ -1,6 +1,6 @@
-package com.Equipe1.AssinaturaDigital.Model;
+package com.Equipe1.AssinaturaDigital.Termo;
 
-public enum tipo {
+public enum Tipo {
     VISITAAGD,           
     LOCACAORLZD,          
     PARCERIA,         

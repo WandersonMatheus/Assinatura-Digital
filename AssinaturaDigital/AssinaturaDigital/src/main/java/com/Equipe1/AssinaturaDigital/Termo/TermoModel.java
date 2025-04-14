@@ -1,33 +1,25 @@
-package com.Equipe1.AssinaturaDigital.Model;
+package com.Equipe1.AssinaturaDigital.Termo;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-
-@Entity
 @Document(collection = "termos")
 public class TermoModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String titulo;
+    private String id; 
 
-    @Column(columnDefinition = "TEXT")
+    private String titulo;
     private String conteudoHtml;
-   
-    @Enumerated(EnumType.STRING)
-    private tipo tipoTermo;
+    
+    private Tipo tipoTermo;
     private String versao;
     
+    // Construtores, getters e setters
+
     public TermoModel() {
     }
 
-    public TermoModel(String titulo, String conteudoHtml, tipo tipoTermo, String versao) {
+    public TermoModel(String titulo, String conteudoHtml, Tipo tipoTermo, String versao) {
         this.titulo = titulo;
         this.conteudoHtml = conteudoHtml;
         this.tipoTermo = tipoTermo;
@@ -50,11 +42,11 @@ public class TermoModel {
         this.conteudoHtml = conteudoHtml;
     }
 
-    public tipo getTipoTermo() {
+    public Tipo getTipoTermo() {
         return tipoTermo;
     }
 
-    public void setTipoTermo(tipo tipoTermo) {
+    public void setTipoTermo(Tipo tipoTermo) {
         this.tipoTermo = tipoTermo;
     }
 
@@ -65,16 +57,14 @@ public class TermoModel {
     public void setVersao(String versao) {
         this.versao = versao;
     }
-    
+
     @Override
     public String toString() {
-        return "Termo{" +
-                "id=" + id +
+        return "TermoModel{" +
+                "id='" + id + '\'' +
                 ", titulo='" + titulo + '\'' +
-                ", tipo=" + tipoTermo +
+                ", tipoTermo=" + tipoTermo +
                 ", versao='" + versao + '\'' +
                 '}';
     }
-    
 }
-

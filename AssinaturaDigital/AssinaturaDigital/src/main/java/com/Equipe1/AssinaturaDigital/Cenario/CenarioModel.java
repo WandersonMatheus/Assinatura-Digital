@@ -1,77 +1,87 @@
-package com.Equipe1.AssinaturaDigital.Model;
+package com.Equipe1.AssinaturaDigital.Cenario;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import com.Equipe1.AssinaturaDigital.Cliente.ClienteModel;
+import com.Equipe1.AssinaturaDigital.Funcionario.FuncionarioModel;
+import com.Equipe1.AssinaturaDigital.Termo.TermoModel;
 
-@Entity
+import java.time.LocalDateTime;
+
 @Document(collection = "cenarios")
 public class CenarioModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String titulo;
-    @ManyToOne
-    private FuncionarioModel funcionario;
-    @ManyToOne
-    private ClienteModel cliente;
-    @OneToMany
-    private List<TermoModel> termos;
-    private LocalDateTime dataCriacao;
-   
     
+    @Id
+    private String id;
+
+    private String titulo;
+    
+    private String funcionarioId;  
+    private String clienteId;   
+    private List<String> termosIds; 
+
+    private LocalDateTime dataCriacao;
+
+
     public CenarioModel() {
     }
-    public CenarioModel(String titulo, FuncionarioModel funcionario, ClienteModel cliente, List<TermoModel> termos,
-            LocalDateTime dataCriacao) {
+
+    public CenarioModel(String titulo, String funcionarioId, String clienteId, List<String> termosIds, LocalDateTime dataCriacao) {
         this.titulo = titulo;
-        this.funcionario = funcionario;
-        this.cliente = cliente;
-        this.termos = termos;
+        this.funcionarioId = funcionarioId;
+        this.clienteId = clienteId;
+        this.termosIds = termosIds;
         this.dataCriacao = dataCriacao;
     }
-    public long getId() {
+
+    public String getId() {
         return id;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getTitulo() {
         return titulo;
     }
+
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-    public FuncionarioModel getFuncionario() {
-        return funcionario;
+
+    public String getFuncionarioId() {
+        return funcionarioId;
     }
-    public void setFuncionario(FuncionarioModel funcionario) {
-        this.funcionario = funcionario;
+
+    public void setFuncionarioId(String funcionarioId) {
+        this.funcionarioId = funcionarioId;
     }
-    public ClienteModel getCliente() {
-        return cliente;
+
+    public String getClienteId() {
+        return clienteId;
     }
-    public void setCliente(ClienteModel cliente) {
-        this.cliente = cliente;
+
+    public void setClienteId(String clienteId) {
+        this.clienteId = clienteId;
     }
-    public List<TermoModel> getTermos() {
-        return termos;
+
+    public List<String> getTermosIds() {
+        return termosIds;
     }
-    public void setTermos(List<TermoModel> termos) {
-        this.termos = termos;
+
+    public void setTermosIds(List<String> termosIds) {
+        this.termosIds = termosIds;
     }
+
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
+
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
-
-    
-    
 }
