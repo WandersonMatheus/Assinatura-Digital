@@ -1,5 +1,5 @@
-package com.Equipe1.AssinaturaDigital.Repository;
+package com.Equipe1.AssinaturaDigital.Cenario;
 
-public class CenarioRepository {
+public interface CenarioRepository {
 
 }

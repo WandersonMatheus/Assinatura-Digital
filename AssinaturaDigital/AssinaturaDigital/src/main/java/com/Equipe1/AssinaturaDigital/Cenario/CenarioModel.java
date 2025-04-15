@@ -4,11 +4,6 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.Equipe1.AssinaturaDigital.Cliente.ClienteModel;
-import com.Equipe1.AssinaturaDigital.Funcionario.FuncionarioModel;
-import com.Equipe1.AssinaturaDigital.Termo.TermoModel;
-
 import java.time.LocalDateTime;
 
 @Document(collection = "cenarios")
@@ -16,13 +11,10 @@ public class CenarioModel {
     
     @Id
     private String id;
-
-    private String titulo;
-    
+    private String titulo; 
     private String funcionarioId;  
     private String clienteId;   
     private List<String> termosIds; 
-
     private LocalDateTime dataCriacao;
 
 

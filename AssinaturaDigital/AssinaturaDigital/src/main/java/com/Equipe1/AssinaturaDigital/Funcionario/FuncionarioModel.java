@@ -3,14 +3,11 @@ package com.Equipe1.AssinaturaDigital.Funcionario;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-@Document(collection = "funcionarios")
+@Document(collection = "funcionarios_db")
 public class FuncionarioModel {
 
     @Id
