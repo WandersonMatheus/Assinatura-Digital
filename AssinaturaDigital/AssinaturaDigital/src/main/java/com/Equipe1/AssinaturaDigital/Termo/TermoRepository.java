@@ -1,4 +1,4 @@
-package com.Equipe1.AssinaturaDigital.Repository;
+package com.Equipe1.AssinaturaDigital.Termo;
 
 public class TermoRepository {
 

@@ -1,15 +1,10 @@
-package com.Equipe1.AssinaturaDigital.Service;
+package com.Equipe1.AssinaturaDigital.Termo;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@RestController
-@RequestMapping
+@Service
 public class TermoService {
-
-    @GetMapping("/boasVindas")
-    public String boasVindas(){
-        return "Primeira mensagem nessa rota";
-    }
+    @Autowired
+    private TermoRepository termoRepository;
 }

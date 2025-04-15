@@ -1,4 +1,4 @@
-package com.Equipe1.AssinaturaDigital.Controller;
+package com.Equipe1.AssinaturaDigital.Cenario;
 
 public class CenarioController {
 
