@@ -13,8 +13,6 @@ public class TermoModel {
     
     private Tipo tipoTermo;
     private String versao;
-    
-    // Construtores, getters e setters
 
     public TermoModel() {
     }
