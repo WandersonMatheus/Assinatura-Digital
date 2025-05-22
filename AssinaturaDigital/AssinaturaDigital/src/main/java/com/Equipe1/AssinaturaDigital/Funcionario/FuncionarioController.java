@@ -1,5 +1,4 @@
 package com.Equipe1.AssinaturaDigital.Funcionario;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,8 +8,12 @@ import java.util.List;
 @RequestMapping("/funcionarios")
 public class FuncionarioController {
 
-    @Autowired
     private FuncionarioService funcionarioService;
+
+    
+    public FuncionarioController(FuncionarioService funcionarioService) {
+        this.funcionarioService = funcionarioService;
+    }
 
     @PostMapping
     public FuncionarioModel criar(@RequestBody FuncionarioModel funcionario) {
