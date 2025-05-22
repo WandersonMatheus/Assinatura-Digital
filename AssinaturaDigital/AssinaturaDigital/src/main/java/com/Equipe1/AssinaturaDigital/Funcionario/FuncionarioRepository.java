@@ -1,9 +1,11 @@
 package com.Equipe1.AssinaturaDigital.Funcionario;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
-
+@Repository
 public interface FuncionarioRepository extends MongoRepository<FuncionarioModel, String> {
 
     // Buscar por e-mail exato

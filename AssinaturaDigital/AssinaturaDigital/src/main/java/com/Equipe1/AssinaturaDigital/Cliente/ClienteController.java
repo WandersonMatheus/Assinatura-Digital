@@ -1,20 +1,16 @@
 package com.Equipe1.AssinaturaDigital.Cliente;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
 
-    @Autowired
-    private ClienteService clienteService;
+    private final ClienteService clienteService;
 
-    @Autowired
     public ClienteController(ClienteService clienteService) {
         this.clienteService = clienteService;
     }
@@ -25,7 +21,7 @@ public class ClienteController {
         return ResponseEntity.ok(novoCliente);
     }
 
-    @GetMapping
+    @GetMapping("/lista")
     public ResponseEntity<List<ClienteModel>> listarClientes() {
         return ResponseEntity.ok(clienteService.listarTodos());
     }
