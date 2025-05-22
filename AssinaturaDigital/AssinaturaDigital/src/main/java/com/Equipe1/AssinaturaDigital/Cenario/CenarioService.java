@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.Equipe1.AssinaturaDigital.Cliente.ClienteModel;
-
 @Service
 public class CenarioService {
 
@@ -39,6 +37,9 @@ public class CenarioService {
     //buscar cenario 
     public Optional<CenarioModel> buscarPorId(String id){
         return cenarioRepository.findById(id);
+    }
+    public List<CenarioModel> buscarPorTitulo(String titulo) {
+        return cenarioRepository.findByTitulo(titulo);
     }
     //Listar cenario
     public List<CenarioModel> listarCenarios(){
