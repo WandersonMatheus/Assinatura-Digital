@@ -38,8 +38,8 @@ public class CenarioController {
             .orElse(ResponseEntity.notFound().build());
     }
     // Criar cenario
-    @PostMapping("/cenario")
-    public ResponseEntity<CenarioModel> criarCenario(@RequestBody CenarioModel cenario) {
+    @PostMapping
+    public ResponseEntity<CenarioModel> criarCenarioController(@RequestBody CenarioModel cenario) {
         CenarioModel novoCenario = cenarioService.criarCenario(cenario);
         return ResponseEntity.ok(novoCenario);
     }
