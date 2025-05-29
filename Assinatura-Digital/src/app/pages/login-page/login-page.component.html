@@ -2,4 +2,8 @@
     title="Login into your account"
     primarybtntext="Login"
     secondarybtntext="Cadastre-se"
-></app-login-layout>
+>
+    <form [formGroup]="loginform">
+        <app-primaryinput></app-primaryinput>
+    </form>
+</app-login-layout>
