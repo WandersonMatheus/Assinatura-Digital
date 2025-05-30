@@ -7,11 +7,12 @@ import {
   FormControl
 } from '@angular/forms';
 import { LoginLayoutComponent } from '../../layout/login-layout/login-layout.component';
+import { PrimaryinputComponent } from '../../components/primaryinput/primaryinput.component';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [LoginLayoutComponent,ReactiveFormsModule],
+  imports: [LoginLayoutComponent,ReactiveFormsModule, PrimaryinputComponent],
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
