@@ -2,6 +2,8 @@
     title="Login into your account"
     primarybtntext="Login"
     secondarybtntext="Cadastre-se"
+    (submit)="submit()"
+    (navigate)="navigate()"
 >
     <form [formGroup]="loginForm">
       <app-primaryinput

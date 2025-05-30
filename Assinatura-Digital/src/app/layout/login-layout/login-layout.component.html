@@ -2,11 +2,11 @@
     <section class="form-section">
         <h2>{{title}}</h2>
         <ng-content></ng-content>
-        <button class="primarybtn">{{primarybtntext}}</button>
+        <button class="primarybtn" (click)='submit()'>{{primarybtntext}}</button>
         <div>
             <span>OR</span>
         </div>
-        <button class="secondarybtn">{{secondarybtntext}}</button>
+        <button class="secondarybtn" (click)='navigate()'>{{secondarybtntext}}</button>
     </section>
     <section class="main-section">
         <img  class="logo" src="assets/Logo.png" />
