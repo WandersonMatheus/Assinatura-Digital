@@ -11,6 +11,7 @@ export class LoginLayoutComponent {
   @Input() title:  String = "";
   @Input() primarybtntext:  String = "";
   @Input() secondarybtntext:  String = "";
+  @Input() disableLogin: boolean = true;
   @Output("submit") onSubmit= new EventEmitter();
   @Output("navigate") onNavigate = new EventEmitter();
 

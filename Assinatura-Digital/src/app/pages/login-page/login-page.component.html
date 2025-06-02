@@ -4,6 +4,7 @@
     secondarybtntext="Cadastre-se"
     (submit)="submit()"
     (navigate)="navigate()"
+    [disableLogin]="!loginForm.valid"
 >
     <form [formGroup]="loginForm">
       <app-primaryinput

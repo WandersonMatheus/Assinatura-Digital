@@ -10,6 +10,7 @@ import { LoginLayoutComponent } from '../../layout/login-layout/login-layout.com
 import { PrimaryinputComponent } from '../../components/primaryinput/primaryinput.component';
 import { Router } from '@angular/router';
 import { LoginServicesService } from '../../services/login-services.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-page',
@@ -22,9 +23,11 @@ import { LoginServicesService } from '../../services/login-services.service';
 export class LoginPageComponent {
   loginForm!: FormGroup;
 
+
   constructor(
     private router:Router,
-    private loginService:LoginServicesService
+    private loginService:LoginServicesService,
+    private toastr: ToastrService
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -33,8 +36,8 @@ export class LoginPageComponent {
   }
   submit(){
     this.loginService.login(this.loginForm.value.email,this.loginForm.value.password).subscribe({
-      next:()=> console.log("sucesso"),
-      error:()=> console.log("error")
+      next:()=> this.toastr.success("Login realizado com sucesso"),
+      error:()=> this.toastr.error("Ops! Ocorreu um erro ao tentar conexão,tente novamente mais tarde.")
     })
   }
   navigate(){
