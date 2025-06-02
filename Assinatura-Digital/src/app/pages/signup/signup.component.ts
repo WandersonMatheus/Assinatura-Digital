@@ -13,15 +13,15 @@ import { LoginServicesService } from '../../services/login-services.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'app-signup',
   standalone: true,
   imports: [LoginLayoutComponent,ReactiveFormsModule, PrimaryinputComponent],
   providers: [LoginServicesService],
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class LoginPageComponent {
-  loginForm!: FormGroup;
+export class SignupComponent {
+  signupForm!: FormGroup;
 
 
   constructor(
@@ -29,18 +29,20 @@ export class LoginPageComponent {
     private loginService:LoginServicesService,
     private toastr: ToastrService
   ) {
-    this.loginForm = new FormGroup({
+    this.signupForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.min(4)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
   }
   submit(){
-    this.loginService.login(this.loginForm.value.email,this.loginForm.value.password).subscribe({
-      next:()=> this.toastr.success("Login realizado com sucesso"),
-      error:()=> this.toastr.error("Ops! Ocorreu um erro ao tentar conexão,tente novamente mais tarde.")
+    this.loginService.login(this.signupForm.value.email,this.signupForm.value.password).subscribe({
+      next:()=> this.toastr.success("Cadastro realizado com sucesso"),
+      error:()=> this.toastr.error("Ops! Ocorreu um erro ao tentar realizar o cadastro,tente novamente mais tarde.")
     })
   }
   navigate(){
-    this.router.navigate(["Cadastro"]);
+    this.router.navigate(["login"]);
   }
 }
