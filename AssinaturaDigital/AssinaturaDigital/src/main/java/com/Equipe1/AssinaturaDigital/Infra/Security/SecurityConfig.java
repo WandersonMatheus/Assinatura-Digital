@@ -51,8 +51,8 @@ public class SecurityConfig {
 
                 // regras de autorização: quem pode acessar o que
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll()  // permite login sem autenticação
-                        .requestMatchers(HttpMethod.POST, "/funcionarios/cadastrar").permitAll() // permitir cadastro
+                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()  // permite login sem autenticação
+                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll() // permitir cadastro
                         .anyRequest().authenticated())
 
                 // adiciona nosso filtro que valida o token JWT em cada requisição
