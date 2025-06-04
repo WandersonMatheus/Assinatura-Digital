@@ -37,8 +37,11 @@ export class SignupComponent {
     });
   }
   submit(){
-    this.loginService.login(this.signupForm.value.email,this.signupForm.value.password).subscribe({
-      next:()=> this.toastr.success("Cadastro realizado com sucesso"),
+    this.loginService.signup(this.signupForm.value.nome,this.signupForm.value.email,this.signupForm.value.password).subscribe({
+      next:()=>{
+        this.toastr.success("Cadastro realizado com sucesso"),
+        this.router.navigate(['/login']);
+      },
       error:()=> this.toastr.error("Ops! Ocorreu um erro ao tentar realizar o cadastro,tente novamente mais tarde.")
     })
   }
