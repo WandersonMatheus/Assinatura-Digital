@@ -1,10 +1,12 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { FunctionsComponent } from "../../components/functions/functions.component";
+import { ListcenaComponent } from "../../components/listcena/listcena.component";
+import { ListclientsComponent } from "../../components/listclients/listclients.component";
 
 @Component({
   selector: 'app-home-layout',
-  imports: [],
+  imports: [FunctionsComponent, ListcenaComponent, ListclientsComponent],
   templateUrl: './home-layout.component.html',
   styleUrl: './home-layout.component.scss'
 })
