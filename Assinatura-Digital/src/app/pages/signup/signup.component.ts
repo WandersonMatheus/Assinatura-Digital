@@ -30,7 +30,7 @@ export class SignupComponent {
     private toastr: ToastrService
   ) {
     this.signupForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.min(4)]),
+      nome: new FormControl('', [Validators.required, Validators.min(4)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(6)]),
