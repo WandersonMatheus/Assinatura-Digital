@@ -36,7 +36,10 @@ export class LoginPageComponent {
   }
   submit(){
     this.loginService.login(this.loginForm.value.email,this.loginForm.value.password).subscribe({
-      next:()=> this.toastr.success("Login realizado com sucesso"),
+      next: () => {
+        this.toastr.success("Login realizado com sucesso");
+        this.router.navigate(['/home']); // redireciona para a home
+      },
       error:()=> this.toastr.error("Ops! Ocorreu um erro ao tentar conexão,tente novamente mais tarde.")
     })
   }
