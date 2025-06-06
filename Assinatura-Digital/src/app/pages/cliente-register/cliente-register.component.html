@@ -1,1 +1,45 @@
-<p>cliente-register works!</p>
+<div class="form-wrapper">
+  <h2>Cadastrar Novo Cliente</h2>
+
+  <form [formGroup]="clienteForm" (ngSubmit)="submit()">
+    <app-primaryinput
+      inputName="nome"
+      label="Nome completo"
+      placeholder="Ex: João da Silva"
+      formControlName="nome"
+      type="text"
+    ></app-primaryinput>
+
+    <app-primaryinput
+      inputName="email"
+      label="E-mail"
+      placeholder="Ex: cliente@email.com"
+      formControlName="email"
+      type="email"
+    ></app-primaryinput>
+
+    <app-primaryinput
+      inputName="telefone"
+      label="Telefone"
+      placeholder="Ex: (31) 98765-4321"
+      formControlName="telefone"
+      type="tel"
+    ></app-primaryinput>
+
+    <app-primaryinput
+      inputName="cpf"
+      label="CPF"
+      placeholder="Ex: 123.456.789-00"
+      formControlName="cpf"
+      type="text"
+    ></app-primaryinput>
+
+    <textarea
+      formControlName="observacoes"
+      placeholder="Observações adicionais"
+      rows="4"
+    ></textarea>
+
+    <button type="submit" [disabled]="clienteForm.invalid">Cadastrar Cliente</button>
+  </form>
+</div>
