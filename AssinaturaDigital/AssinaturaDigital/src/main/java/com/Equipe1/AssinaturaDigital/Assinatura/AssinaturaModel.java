@@ -5,19 +5,52 @@ import java.time.LocalDateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.Equipe1.AssinaturaDigital.StatusAssinatura;
+
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
 @Document(collection = "assinaturas") 
 public class AssinaturaModel {
 
     @Id
     private String id; 
-    
     private String clienteId;  
     private String termoId;    
     private String cenarioId;  
-    
     private LocalDateTime dataAssinatura;
     private String ip;
     private String localizacao;
+
+    public StatusAssinatura getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusAssinatura status) {
+        this.status = status;
+    }
+
+    public String getLinkAssinatura() {
+        return linkAssinatura;
+    }
+
+    public void setLinkAssinatura(String linkAssinatura) {
+        this.linkAssinatura = linkAssinatura;
+    }
+
+    public LocalDateTime getDataEnvioLink() {
+        return dataEnvioLink;
+    }
+
+    public void setDataEnvioLink(LocalDateTime dataEnvioLink) {
+        this.dataEnvioLink = dataEnvioLink;
+    }
+
+    @Enumerated(EnumType.STRING)
+    private StatusAssinatura status = StatusAssinatura.CRIADA;
+    
+    private String linkAssinatura; // URL gerada para o cliente
+    private LocalDateTime dataEnvioLink;
 
     // Construtores, getters e setters
 

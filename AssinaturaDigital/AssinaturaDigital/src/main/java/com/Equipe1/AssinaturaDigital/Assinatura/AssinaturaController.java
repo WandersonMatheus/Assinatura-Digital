@@ -12,32 +12,60 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Equipe1.AssinaturaDigital.StatusAssinatura;
+
 @RestController
 @RequestMapping("/Assinaturas")
 public class AssinaturaController {
 
-    private final AssinaturaService assinatura;
+    private final AssinaturaService assinaturaService;
 
     public AssinaturaController(AssinaturaService assinatura) {
-        this.assinatura = assinatura;
+        this.assinaturaService = assinatura;
     }
 
     // Corrigido: agora tem o @GetMapping para listar todas as assinaturas
     @GetMapping
     public ResponseEntity<List<AssinaturaModel>> listarAssinaturas() {
-        return ResponseEntity.ok(assinatura.listarAssinatura());
+        return ResponseEntity.ok(assinaturaService.listarAssinatura());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AssinaturaModel> buscarPorId(@PathVariable String id) {
-        return assinatura.buscarAssinatura(id)
+        return assinaturaService.buscarAssinatura(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
     }
-
+  @PostMapping("/{id}/gerar-link")
+    public ResponseEntity<AssinaturaModel> gerarLink(@PathVariable String id) {
+        try {
+            AssinaturaModel assinatura = assinaturaService.gerarLinkAssinatura(id);
+            return ResponseEntity.ok(assinatura);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    // NOVO: Marcar como assinada (quando cliente clica em assinar)
+    @PostMapping("/{id}/assinar")
+    public ResponseEntity<AssinaturaModel> marcarComoAssinada(@PathVariable String id) {
+        try {
+            AssinaturaModel assinatura = assinaturaService.marcarComoAssinada(id);
+            return ResponseEntity.ok(assinatura);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    // NOVO: Buscar por status
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<AssinaturaModel>> buscarPorStatus(@PathVariable StatusAssinatura status) {
+        List<AssinaturaModel> assinaturas = assinaturaService.buscarPorStatus(status);
+        return ResponseEntity.ok(assinaturas);
+    }
     @PostMapping
     public ResponseEntity<AssinaturaModel> criarAssinaturaController(@RequestBody AssinaturaModel novaAssinatura) {
-        AssinaturaModel criada = assinatura.criarAssinatura(novaAssinatura);
+        AssinaturaModel criada = assinaturaService.criarAssinatura(novaAssinatura);
         return ResponseEntity.ok(criada);
     }
 }
