@@ -3,10 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ClenteService } from '../../services/clente.service';
+import { PrimaryinputComponent } from "../../components/primaryinput/primaryinput.component";
 
 @Component({
   selector: 'app-cliente-register',
-  imports: [],
+  imports: [PrimaryinputComponent],
   templateUrl: './cliente-register.component.html',
   styleUrl: './cliente-register.component.scss'
 })
