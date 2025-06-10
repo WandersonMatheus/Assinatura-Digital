@@ -4,6 +4,7 @@
     <button (click)="carregarAssinaturas()" [disabled]="carregando" class="atualizar">
       {{ carregando ? 'Carregando...' : 'Atualizar' }}
     </button>
+    <button (click)="criarAssinaturas()" class="create">Criar Assinaturas</button>
   </div>
 
   <div class="cards-grid" *ngIf="!carregando && !erro && assinaturas.length > 0">

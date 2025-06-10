@@ -6,8 +6,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.Equipe1.AssinaturaDigital.StatusAssinatura;
-
 @Service
 public class AssinaturaService {
 //CRUD

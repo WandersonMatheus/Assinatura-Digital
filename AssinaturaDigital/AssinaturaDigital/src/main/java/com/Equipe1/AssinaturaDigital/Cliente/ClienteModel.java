@@ -20,6 +20,7 @@ public class ClienteModel {
 
     @NotBlank
     private String telefone;
+    
 
     // Construtores, getters e setters
 

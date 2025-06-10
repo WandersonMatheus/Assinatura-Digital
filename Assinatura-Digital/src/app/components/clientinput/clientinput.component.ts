@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-type InputTypes = 'text' | 'email' | 'tel' | 'date';
+export type InputTypes = 'text' | 'email' | 'password' | 'tel' | 'number';
 
 @Component({
   selector: 'app-clientinput',

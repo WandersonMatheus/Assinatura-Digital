@@ -4,6 +4,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { ClienteRegisterComponent } from './pages/cliente-register/cliente-register.component';
+import { AssCreateComponent } from './pages/ass-create/ass-create.component';
 
 
 export const routes: Routes = [
@@ -23,5 +24,9 @@ export const routes: Routes = [
     {
         path:"clientRegister",
         component:ClienteRegisterComponent
+    },
+    {
+        path:"Assinaturas/create",
+        component:AssCreateComponent
     }
 ];

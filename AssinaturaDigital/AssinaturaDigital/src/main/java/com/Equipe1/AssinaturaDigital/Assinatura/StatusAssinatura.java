@@ -1,4 +1,4 @@
-package com.Equipe1.AssinaturaDigital;
+package com.Equipe1.AssinaturaDigital.Assinatura;
 
 public enum StatusAssinatura {
     CRIADA("Criada"),

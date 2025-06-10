@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.Equipe1.AssinaturaDigital.StatusAssinatura;
-
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
