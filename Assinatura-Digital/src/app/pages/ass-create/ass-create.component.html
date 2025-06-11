@@ -1,1 +1,30 @@
-<p>ass-create works!</p>
+<form [formGroup]="form" (ngSubmit)="gerarLink()">
+  <label for="cliente">Cliente:</label>
+  <select id="cliente" formControlName="clienteId">
+    <option *ngFor="let cliente of clientes" [value]="cliente.id">
+      {{ cliente.nome }}
+    </option>
+  </select>
+
+  <label for="termo">Termo:</label>
+  <select id="termo" formControlName="termoId">
+    <option *ngFor="let termo of termos" [value]="termo.id">
+      {{ termo.titulo }}
+    </option>
+  </select>
+
+  <label for="cenario">Cenário:</label>
+  <select id="cenario" formControlName="cenarioId">
+    <option *ngFor="let cenario of cenarios" [value]="cenario.id">
+      {{ cenario.nome }}
+    </option>
+  </select>
+
+  <button type="submit">Gerar link de assinatura</button>
+</form>
+
+<div *ngIf="linkGerado">
+  <p>Link gerado:</p>
+  <input type="text" [value]="linkGerado" readonly>
+  <button (click)="copiarLink()">Copiar</button>
+</div>
