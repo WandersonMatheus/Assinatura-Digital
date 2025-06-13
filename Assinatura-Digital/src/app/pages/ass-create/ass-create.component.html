@@ -11,7 +11,7 @@
             <label for="cliente">Cliente:</label>
             <select id="cliente" formControlName="clienteId">
               <option *ngFor="let cliente of clientes" [value]="cliente.id">
-                {{ cliente.nome }}
+                {{ cliente.nome }} - {{ cliente.cpf }}
               </option>
             </select>
             <button>Criar cliente</button>
