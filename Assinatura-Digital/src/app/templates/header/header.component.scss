@@ -1,3 +1,4 @@
+@import "../../../styles/variables.scss";
 .Logo{
     margin-top: 8px;
     width: 120px;
@@ -16,4 +17,13 @@
         width: 40px;
         height: 40px;
     }
+}
+.btn-outline-success{
+    border:solid 1px $primary-color;
+    color: $txt;
+}
+.btn-outline-success:hover{
+    background-color: $primary-color;
+    color: white;
+    transition-duration: 0.3s;
 }
