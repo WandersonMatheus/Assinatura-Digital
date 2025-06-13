@@ -54,6 +54,25 @@ main{
         color: white;
         transition-duration: 0.6s;
     }
+    select {
+    background-color: $white;
+    border: 1px solid $gray-border;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: $txt;
+    transition: border-color 0.2s ease;
+
+        &:focus {
+            box-shadow: 0 0 0 2px rgba(245, 130, 32, 0.2);
+        }
+
+        option {
+            border-radius: 4px;
+            background-color: $white;
+            color: $txt;
+        }
+    }
 }
 
 

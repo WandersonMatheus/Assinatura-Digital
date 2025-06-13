@@ -6,6 +6,7 @@ import { FooterComponent } from "../../templates/footer/footer.component";
 import { Cliente } from '../../models/Cliente.model';
 import { CommonModule } from '@angular/common';
 import { Route, Router } from '@angular/router';
+import { Termo } from '../../models/Termo.model';
 
 @Component({
   selector: 'app-ass-create',
@@ -30,7 +31,7 @@ export class AssCreateComponent {
 
   ngOnInit(): void {
     this.http.get<Cliente[]>('http://localhost:8080/clientes').subscribe(res => this.clientes = res);
-    this.http.get('/api/termos').subscribe((res: any) => this.termos = res);
+    this.http.get<Termo[]>('http://localhost:8080/termos/lista').subscribe(res=> this.termos = res);
     this.http.get('/api/cenarios').subscribe((res: any) => this.cenarios = res);
   }
 

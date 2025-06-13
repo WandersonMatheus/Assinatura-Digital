@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
-@RequestMapping("/Termos")
+@RequestMapping("/termos")
 public class TermoController {
 
     private final TermoService termoService;

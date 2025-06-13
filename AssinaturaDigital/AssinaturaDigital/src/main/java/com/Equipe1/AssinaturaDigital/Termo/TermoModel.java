@@ -7,10 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class TermoModel {
     @Id
     private String id; 
-
     private String titulo;
     private String conteudoHtml;
-    
     private Tipo tipoTermo;
     private String versao;
 
