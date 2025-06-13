@@ -22,7 +22,7 @@ export const routes: Routes = [
         canActivate:[AuthGuard]
     },
     {
-        path:"clientRegister",
+        path:"Assinaturas/create/RegistroClientes",
         component:ClienteRegisterComponent
     },
     {

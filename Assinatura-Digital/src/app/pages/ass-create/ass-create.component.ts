@@ -5,6 +5,7 @@ import { HeaderComponent } from "../../templates/header/header.component";
 import { FooterComponent } from "../../templates/footer/footer.component";
 import { Cliente } from '../../models/Cliente.model';
 import { CommonModule } from '@angular/common';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-ass-create',
@@ -19,7 +20,7 @@ export class AssCreateComponent {
   cenarios: any[] = [];
   linkGerado: string | null = null;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private http: HttpClient,private router: Router) {
     this.form = this.fb.group({
       clienteId: [''],
       termoId: [''],
@@ -45,5 +46,8 @@ export class AssCreateComponent {
       navigator.clipboard.writeText(this.linkGerado);
       alert('Link copiado para a área de transferência!');
     }
+  }
+  criarCliente() {
+    this.router.navigate(["Assinaturas/create/RegistroClientes"])
   }
 }
