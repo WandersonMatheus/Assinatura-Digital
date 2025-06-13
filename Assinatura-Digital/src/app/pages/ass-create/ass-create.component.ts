@@ -1,16 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from "../../templates/header/header.component";
+import { FooterComponent } from "../../templates/footer/footer.component";
+import { Cliente } from '../../models/Cliente.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ass-create',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, HeaderComponent, FooterComponent,CommonModule],
   templateUrl: './ass-create.component.html',
-  styleUrl: './ass-create.component.scss'
+  styleUrls: ['./ass-create.component.scss']  // <- corrigido
 })
 export class AssCreateComponent {
   form: FormGroup;
-  clientes: any[] = [];
+  clientes: Cliente[] = [];
   termos: any[] = [];
   cenarios: any[] = [];
   linkGerado: string | null = null;
@@ -24,7 +28,7 @@ export class AssCreateComponent {
   }
 
   ngOnInit(): void {
-    this.http.get('/api/clientes').subscribe((res: any) => this.clientes = res);
+    this.http.get<Cliente[]>('http://localhost:8080/clientes').subscribe(res => this.clientes = res);
     this.http.get('/api/termos').subscribe((res: any) => this.termos = res);
     this.http.get('/api/cenarios').subscribe((res: any) => this.cenarios = res);
   }

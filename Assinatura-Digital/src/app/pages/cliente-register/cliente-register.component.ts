@@ -3,15 +3,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ClenteService } from '../../services/clente.service';
-import { PrimaryinputComponent } from "../../components/primaryinput/primaryinput.component";
-import { ClientinputComponent } from '../../components/clientinput/clientinput.component';
-
 
 @Component({
   selector: 'app-cliente-register',
   imports: [ReactiveFormsModule],
   templateUrl: './cliente-register.component.html',
-  styleUrl: './cliente-register.component.scss'
+  styleUrls: ['./cliente-register.component.scss']  // CORRIGIDO: styleUrls (plural)
 })
 export class ClienteRegisterComponent {
   
@@ -20,11 +17,11 @@ export class ClienteRegisterComponent {
     email: new FormControl('', [Validators.email]),
     telefone: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^\d{10,11}$/) // Aceita telefones com ou sem 9º dígito
+      Validators.pattern(/^\d{10,11}$/)
     ]),
     cpf: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^\d{11}$/) // Apenas números
+      Validators.pattern(/^\d{11}$/)
     ]),
     observacoes: new FormControl('')
   });
@@ -41,7 +38,10 @@ export class ClienteRegisterComponent {
       return;
     }
 
-    this.clienteService.cadastrar(this.clienteForm.value).subscribe({
+    // Se ClenteService.cadastrar espera um tipo específico, faça um cast:
+    const cliente = this.clienteForm.value as any; // ou use sua interface Cliente aqui
+
+    this.clienteService.cadastrar(cliente).subscribe({
       next: () => {
         this.toastr.success('Cliente cadastrado com sucesso!');
         this.router.navigate(['/home']);

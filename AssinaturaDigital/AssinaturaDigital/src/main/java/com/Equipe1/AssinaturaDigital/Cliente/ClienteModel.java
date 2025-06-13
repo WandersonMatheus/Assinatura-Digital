@@ -12,6 +12,9 @@ public class ClienteModel {
     private String id;  
 
     @NotBlank
+    private String cpf;
+
+    @NotBlank
     private String nome;
 
     @NotBlank
@@ -27,10 +30,11 @@ public class ClienteModel {
     public ClienteModel() {
     }
 
-    public ClienteModel(String nome, String telefone, String email) {
+    public ClienteModel(String nome, String telefone, String email,String cpf) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
+        this.cpf = cpf;
     }
 
     public String getId() {
@@ -63,5 +67,13 @@ public class ClienteModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }  
 }

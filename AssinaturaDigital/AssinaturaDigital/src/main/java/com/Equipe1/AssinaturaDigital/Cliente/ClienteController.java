@@ -1,12 +1,14 @@
 package com.Equipe1.AssinaturaDigital.Cliente;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/clientes")
+@PreAuthorize("isAuthenticated()")
 public class ClienteController {
 
     private final ClienteService clienteService;
@@ -21,7 +23,7 @@ public class ClienteController {
         return ResponseEntity.ok(novoCliente);
     }
 
-    @GetMapping("/lista")
+    @GetMapping
     public ResponseEntity<List<ClienteModel>> listarClientes() {
         return ResponseEntity.ok(clienteService.listarTodos());
     }
