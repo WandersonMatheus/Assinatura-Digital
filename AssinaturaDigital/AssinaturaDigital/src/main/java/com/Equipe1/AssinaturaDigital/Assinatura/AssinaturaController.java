@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/Assinaturas")
@@ -62,8 +64,17 @@ public class AssinaturaController {
         return ResponseEntity.ok(assinaturas);
     }
     @PostMapping
-    public ResponseEntity<AssinaturaModel> criarAssinaturaController(@RequestBody AssinaturaModel novaAssinatura) {
-        AssinaturaModel criada = assinaturaService.criarAssinatura(novaAssinatura);
-        return ResponseEntity.ok(criada);
-    }
+    public ResponseEntity<AssinaturaModel> criarAssinaturaComPdf(
+        @RequestParam String clienteId,
+        @RequestParam String termoId,
+        @RequestParam(required = false) String cenarioId,
+        @RequestParam("pdf") MultipartFile pdfFile
+    ) {
+        try {
+            AssinaturaModel novaAssinatura = assinaturaService.criarAssinatura(clienteId, termoId, cenarioId, pdfFile);
+            return ResponseEntity.ok(novaAssinatura);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }   
 }

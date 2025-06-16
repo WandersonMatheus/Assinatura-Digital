@@ -19,6 +19,25 @@ public class AssinaturaModel {
     private LocalDateTime dataAssinatura;
     private String ip;
     private String localizacao;
+    private String pdfPath;
+
+    public AssinaturaModel(String clienteId, String termoId, String cenarioId, LocalDateTime dataAssinatura, String ip, String localizacao, String pdfPath) {
+        this.clienteId = clienteId;
+        this.termoId = termoId;
+        this.cenarioId = cenarioId;
+        this.dataAssinatura = dataAssinatura;
+        this.ip = ip;
+        this.localizacao = localizacao;
+        this.pdfPath = pdfPath;
+    }
+
+    public String getPdfPath() {
+        return pdfPath;
+    }
+
+    public void setPdfPath(String pdfPath) {
+        this.pdfPath = pdfPath;
+    }
 
     public StatusAssinatura getStatus() {
         return status;
@@ -53,15 +72,6 @@ public class AssinaturaModel {
     // Construtores, getters e setters
 
     public AssinaturaModel() {
-    }
-
-    public AssinaturaModel(String clienteId, String termoId, String cenarioId, LocalDateTime dataAssinatura, String ip, String localizacao) {
-        this.clienteId = clienteId;
-        this.termoId = termoId;
-        this.cenarioId = cenarioId;
-        this.dataAssinatura = dataAssinatura;
-        this.ip = ip;
-        this.localizacao = localizacao;
     }
 
     public String getId() {

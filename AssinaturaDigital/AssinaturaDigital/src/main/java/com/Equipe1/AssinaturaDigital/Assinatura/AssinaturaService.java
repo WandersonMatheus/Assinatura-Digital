@@ -3,6 +3,12 @@ package com.Equipe1.AssinaturaDigital.Assinatura;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
+import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.stereotype.Service;
 
@@ -14,6 +20,31 @@ public class AssinaturaService {
     public AssinaturaService(AssinaturaRepository assinaturaRepository) {
         this.assinaturaRepository = assinaturaRepository;
     }
+
+public AssinaturaModel criarAssinatura(String clienteId, String termoId, String cenarioId, MultipartFile pdfFile) {
+    // Gerar nome aleatório para o PDF
+    String nomePdf = UUID.randomUUID().toString() + ".pdf";
+    Path caminho = Paths.get("uploads", nomePdf);
+
+    try {
+        Files.createDirectories(caminho.getParent()); // Garante que o diretório exista
+        Files.write(caminho, pdfFile.getBytes());     // Salva o PDF
+    } catch (IOException e) {
+        throw new RuntimeException("Erro ao salvar o PDF", e);
+    }
+
+    // Criar nova assinatura
+    AssinaturaModel novaAssinatura = new AssinaturaModel();
+    novaAssinatura.setClienteId(clienteId);
+    novaAssinatura.setTermoId(termoId);
+    novaAssinatura.setCenarioId(cenarioId);
+    novaAssinatura.setDataAssinatura(LocalDateTime.now());
+    novaAssinatura.setStatus(StatusAssinatura.CRIADA);
+    novaAssinatura.setPdfPath("/arquivos/" + nomePdf); // link público para frontend
+
+    return assinaturaRepository.save(novaAssinatura);
+}
+
 
 // create
     public AssinaturaModel criarAssinatura(AssinaturaModel assinatura){
@@ -34,13 +65,12 @@ public class AssinaturaService {
             AssinaturaModel assinatura = assinaturaOpt.get();
             
             // Gerar link (sempre o mesmo padrão)
-            String link = "https://seudominio.com/assinar/" + id;
+            String link = "http://localhost:4200/assinar/" + id;
             
             // Atualizar status e dados
             assinatura.setLinkAssinatura(link);
             assinatura.setStatus(StatusAssinatura.LINK_ENVIADO);
             assinatura.setDataEnvioLink(LocalDateTime.now());
-            
             return assinaturaRepository.save(assinatura);
         }
         

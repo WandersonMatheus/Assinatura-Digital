@@ -15,6 +15,7 @@ import { Termo } from '../../models/Termo.model';
   styleUrls: ['./ass-create.component.scss']  // <- corrigido
 })
 export class AssCreateComponent {
+  pdfSelecionado!: File;
   form: FormGroup;
   clientes: Cliente[] = [];
   termos: any[] = [];
@@ -28,20 +29,30 @@ export class AssCreateComponent {
       cenarioId: ['']
     });
   }
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.pdfSelecionado = input.files[0];
+    }
+  }
+
+  gerarLink() {
+    const formData = new FormData();
+    formData.append('clienteId', this.form.get('clienteId')?.value);
+    formData.append('termoId', this.form.get('termoId')?.value);
+    formData.append('cenarioId', this.form.get('cenarioId')?.value);
+    formData.append('pdf', this.pdfSelecionado);
+
+    this.http.post('/api/assinaturas/criar', formData).subscribe((res: any) => {
+      this.linkGerado = res.linkAssinatura;
+    });
+  }
 
   ngOnInit(): void {
     this.http.get<Cliente[]>('http://localhost:8080/clientes').subscribe(res => this.clientes = res);
     this.http.get<Termo[]>('http://localhost:8080/termos/lista').subscribe(res=> this.termos = res);
     this.http.get('/api/cenarios').subscribe((res: any) => this.cenarios = res);
   }
-
-  gerarLink() {
-    const payload = this.form.value;
-    this.http.post('/api/assinaturas/criar', payload).subscribe((res: any) => {
-      this.linkGerado = res.linkAssinatura;
-    });
-  }
-
   copiarLink() {
     if (this.linkGerado) {
       navigator.clipboard.writeText(this.linkGerado);
