@@ -7,6 +7,7 @@ import { Cliente } from '../../models/Cliente.model';
 import { CommonModule } from '@angular/common';
 import { Route, Router } from '@angular/router';
 import { Termo } from '../../models/Termo.model';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-ass-create',
@@ -36,17 +37,42 @@ export class AssCreateComponent {
     }
   }
 
-  gerarLink() {
-    const formData = new FormData();
-    formData.append('clienteId', this.form.get('clienteId')?.value);
-    formData.append('termoId', this.form.get('termoId')?.value);
-    formData.append('cenarioId', this.form.get('cenarioId')?.value);
-    formData.append('pdf', this.pdfSelecionado);
+gerarLink() {
+  console.log('=== FRONTEND DEBUG ===');
+  console.log('clienteId:', this.form.get('clienteId')?.value);
+  console.log('termoId:', this.form.get('termoId')?.value);
+  console.log('cenarioId:', this.form.get('cenarioId')?.value);
+  console.log('pdfSelecionado:', this.pdfSelecionado);
 
-    this.http.post('/api/assinaturas/criar', formData).subscribe((res: any) => {
-      this.linkGerado = res.linkAssinatura;
-    });
+  if (!this.pdfSelecionado) {
+    alert('Por favor, selecione um arquivo PDF');
+    return;
   }
+
+  const formData = new FormData();
+  formData.append('clienteId', this.form.get('clienteId')?.value);
+  formData.append('termoId', this.form.get('termoId')?.value);
+  formData.append('cenarioId', this.form.get('cenarioId')?.value);
+  formData.append('pdf', this.pdfSelecionado); // CORRIGIDO: 'pdf' em vez de 'pdfFile'
+
+  const token = sessionStorage.getItem('auth-token');
+  console.log('Token:', token ? 'Presente' : 'Ausente');
+
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  // CORRIGIDO: URL sem '/criar'
+  this.http.post('http://localhost:8080/Assinaturas', formData, { headers })
+    .subscribe({
+      next: (res: any) => {
+        console.log('Resposta recebida:', res);
+        this.linkGerado = res.linkAssinatura || 'Link gerado com sucesso';
+      },
+      error: (error) => {
+        console.error('Erro completo:', error);
+        alert('Erro ao criar assinatura: ' + error.message);
+      }
+    });
+}
 
   ngOnInit(): void {
     this.http.get<Cliente[]>('http://localhost:8080/clientes').subscribe(res => this.clientes = res);

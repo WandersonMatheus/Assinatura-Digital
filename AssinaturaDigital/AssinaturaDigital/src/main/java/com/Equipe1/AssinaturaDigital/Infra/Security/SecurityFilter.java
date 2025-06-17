@@ -27,15 +27,34 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        
+        // LOGS PARA DEBUG - ADICIONE ESTES
+        System.out.println("=== SECURITY FILTER DEBUG ===");
+        System.out.println("Request URI: " + request.getRequestURI());
+        System.out.println("Request Method: " + request.getMethod());
+        System.out.println("Content-Type: " + request.getContentType());
+        
         var token = this.recoverToken(request);
-        var login = tokenService.validateToken(token);
-
-        if(login != null){
-            FuncionarioModel user = userRepository.findByEmail(login).orElseThrow(() -> new RuntimeException("User Not Found"));
-            var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        System.out.println("Token extraído: " + (token != null ? "SIM" : "NÃO"));
+        
+        if(token != null){
+            var login = tokenService.validateToken(token);
+            System.out.println("Login validado: " + login);
+            
+            if(login != null){
+                try {
+                    FuncionarioModel user = userRepository.findByEmail(login).orElseThrow(() -> new RuntimeException("User Not Found"));
+                    var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+                    var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    System.out.println("Usuário autenticado: " + user.getEmail());
+                } catch (Exception e) {
+                    System.out.println("Erro ao autenticar usuário: " + e.getMessage());
+                }
+            }
         }
+        System.out.println("=== FIM DEBUG ===");
+        
         filterChain.doFilter(request, response);
     }
 
@@ -44,4 +63,5 @@ public class SecurityFilter extends OncePerRequestFilter {
         if(authHeader == null) return null;
         return authHeader.replace("Bearer ", "");
     }
+
 }

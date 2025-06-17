@@ -11,6 +11,21 @@ import { Termo } from '../models/Termo.model';
 export class AssinaturasService {
   private baseUrl = 'http://localhost:8080';
   constructor(private http:HttpClient) { }
+criarAssinaturaComPdf(
+  clienteId: string,
+  termoId: string,
+  cenarioId: string,
+  pdfFile: File
+): Observable<Assinatura> {
+  const formData = new FormData();
+  formData.append('clienteId', clienteId);
+  formData.append('termoId', termoId);
+  formData.append('cenarioId', cenarioId);
+  formData.append('pdf', pdfFile); // CORRIGIDO: 'pdf' em vez de 'pdfFile'
+
+  // CORRIGIDO: URL sem barra extra no final
+  return this.http.post<Assinatura>(`${this.baseUrl}/Assinaturas`, formData);
+}
   // Listar todas as assinaturas
   listarAssinaturas():Observable<Assinatura[]>{
   return this.http.get<Assinatura[]>(`${this.baseUrl}/Assinaturas`);
