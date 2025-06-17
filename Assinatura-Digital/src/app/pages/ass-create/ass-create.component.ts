@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { Route, Router } from '@angular/router';
 import { Termo } from '../../models/Termo.model';
 import { HttpHeaders } from '@angular/common/http';
+import { Assinatura } from '../../models/Assinatura.model';
+import { AssinaturasService } from '../../services/assinaturas.service';
 
 @Component({
   selector: 'app-ass-create',
@@ -22,8 +24,10 @@ export class AssCreateComponent {
   termos: any[] = [];
   cenarios: any[] = [];
   linkGerado: string | null = null;
+  assinatura!: Assinatura;
 
-  constructor(private fb: FormBuilder, private http: HttpClient,private router: Router) {
+  constructor(private fb: FormBuilder, private http: HttpClient,private router: Router,  private assinaturasService: AssinaturasService
+) {
     this.form = this.fb.group({
       clienteId: [''],
       termoId: [''],
@@ -37,7 +41,8 @@ export class AssCreateComponent {
     }
   }
 
-gerarLink() {
+/*
+  gerarLink() {
   console.log('=== FRONTEND DEBUG ===');
   console.log('clienteId:', this.form.get('clienteId')?.value);
   console.log('termoId:', this.form.get('termoId')?.value);
@@ -72,7 +77,45 @@ gerarLink() {
         alert('Erro ao criar assinatura: ' + error.message);
       }
     });
+} */
+
+gerarLinkAssinatura() {
+  if (!this.pdfSelecionado) {
+    alert('Por favor, selecione um arquivo PDF');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('clienteId', this.form.get('clienteId')?.value);
+  formData.append('termoId', this.form.get('termoId')?.value);
+  formData.append('cenarioId', this.form.get('cenarioId')?.value);
+  formData.append('pdf', this.pdfSelecionado);
+
+  const token = sessionStorage.getItem('auth-token');
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  // 1 - Criar assinatura
+  this.http.post<Assinatura>('http://localhost:8080/Assinaturas', formData, { headers })
+    .subscribe({
+      next: assinaturaCriada => {
+        this.assinatura = assinaturaCriada;
+
+        // 2 - Gerar link usando o ID que veio na resposta
+        this.assinaturasService.gerarLink(assinaturaCriada.id).subscribe({
+          next: assinaturaAtualizada => {
+            this.assinatura = assinaturaAtualizada;
+            this.linkGerado = assinaturaAtualizada.linkAssinatura || null;
+            alert('Link gerado: ' + this.linkGerado);
+          },
+          error: () => alert('Erro ao gerar link')
+        });
+      },
+      error: err => {
+        alert('Erro ao criar assinatura: ' + err.message);
+      }
+    });
 }
+
 
   ngOnInit(): void {
     this.http.get<Cliente[]>('http://localhost:8080/clientes').subscribe(res => this.clientes = res);

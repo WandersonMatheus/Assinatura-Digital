@@ -44,6 +44,7 @@ criarAssinaturaComPdf(
   buscarTermo(id: string): Observable<Termo> {
     return this.http.get<Termo>(`${this.baseUrl}/Termos/${id}`);
   }
+  
 
     gerarLink(id: string): Observable<Assinatura> {
     return this.http.post<Assinatura>(`${this.baseUrl}/Assinaturas/${id}/gerar-link`, {});

@@ -7,7 +7,7 @@
           <h1>Criar assinatura</h1>
       </div>
       <div class="input-content">
-          <form [formGroup]="form" (ngSubmit)="gerarLink()">
+          <form [formGroup]="form" (ngSubmit)="gerarLinkAssinatura()">
             <label for="cliente">Cliente:</label>
             <select id="cliente" formControlName="clienteId">
               <option *ngFor="let cliente of clientes" [value]="cliente.id">

@@ -1,12 +1,28 @@
+import { Cliente } from "./Cliente.model";
+import { Termo } from "./Termo.model";
+
 export interface Assinatura {
   id: string;
-  titulo: string;
-  funcionarioId: string;
+
+  // Relacionamentos
   clienteId: string;
-  termosIds: string[];
-  dataCriacao: string; // ou Date se o backend enviar formatado
-  status: 'CRIADA' | 'LINK_ENVIADO' | 'ASSINADA' | 'CANCELADA';
-  linkAssinatura?: string;
+  funcionarioId: string;
+  termoId: string; // ✅ Se quiser permitir múltiplos termos. Se só permitir um, use termoId: string
+  cliente: Cliente; // ✅ Tipar corretamente se o modelo Cliente existir
+  termo: Termo;     // ✅ Mesmo acima
+
+  // Informações do PDF
+  pdfUrl: string; // ✅ Apenas se estiver disponível no backend
+  titulo: string;
+
+  // Datas
+  dataCriacao: string;       // ou Date — veja abaixo
   dataEnvioLink?: string;
   dataAssinatura?: string;
+
+  // Status da assinatura
+  status: 'CRIADA' | 'LINK_ENVIADO' | 'ASSINADA' | 'CANCELADA';
+
+  // Link dinâmico
+  linkAssinatura?: string;
 }

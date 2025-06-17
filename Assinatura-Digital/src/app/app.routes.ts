@@ -5,6 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { ClienteRegisterComponent } from './pages/cliente-register/cliente-register.component';
 import { AssCreateComponent } from './pages/ass-create/ass-create.component';
+import { AssinaturaPublicaComponent } from './pages/assinatura-publica/assinatura-publica.component';
 
 
 export const routes: Routes = [
@@ -28,5 +29,10 @@ export const routes: Routes = [
     {
         path:"Assinaturas/create",
         component:AssCreateComponent
+    },
+    {
+        path:"assinar/:id",
+        component:AssinaturaPublicaComponent
     }
+
 ];
